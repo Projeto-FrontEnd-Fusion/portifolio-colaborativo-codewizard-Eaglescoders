@@ -18,12 +18,27 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         
       <h2 className="text-[#B5B3BC] p-20 text-center text-[25px] ">Comentários e avaliações</h2>
 
-      <section className="flex flex-row justify-around"> 
+      <section className="flex flex-col lg:flex-row">
+
       
   <Comments />
   <Comments />
   <Comments />
+  
+
   </section>
+  <div className="flex justify-center cursor-pointer pt-10">
+
+  <svg width="136" height="16" viewBox="0 0 136 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="8" cy="8" r="8" fill="#0A1045"/>
+<circle cx="38" cy="8" r="8" fill="#B5B3BC"/>
+<circle cx="68" cy="8" r="8" fill="#B5B3BC"/>
+<circle cx="98" cy="8" r="8" fill="#B5B3BC"/>
+<circle cx="128" cy="8" r="8" fill="#B5B3BC"/>
+
+</svg>
+</div>
+  
   <Commentar/>
 </section>
       <span>[Coloque aqui o cabecalho]</span> 

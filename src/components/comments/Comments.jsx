@@ -1,11 +1,13 @@
-import foto from '/src/assets/image.png';
+
+import foto2 from '/src/assets/person.png';
+
 
 export function Comments() {
     return (
-    <section> 
+    <section > 
        
   
-        <div className='h-150 rounded-lg p-10 m-5   bg-[#221C3E] mr-10 ml-10 ' >
+        <div className='h-100 rounded-lg p-10 m-5   bg-[#221C3E] mr-10 ml-10 ' >
 
         <header className="flex flex-row mb-10 ">
           <svg  width="20" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,19 +37,21 @@ export function Comments() {
 
         </header>
 
-        <main  className=" text-white">
-            <p className="text-[13px]">
-            Vejo um potencial incrível no Frontend Fusion. A colaboração é a essência do avanço tecnológico, e vocês capturaram isso de forma brilhante. Achei inspirador. 
-            Recomendo focar na escalabilidade do projeto para garantir que a estrutura possa crescer sem comprometer a qualidade.
-            </p>
-        </main>
-        <footer className=" text-white grid grid-cols-2 mt-10">
-            <img className="w-12 h-99  " src={foto} alt="" />
-            <span>
-                <h3>Linus Torvalds</h3>
-                <p>criador do linux</p>
-            </span>
-        </footer>
+        <div className="text-white">
+      <main className="text-xs font-mulish">
+        <p>
+        Vejo um potencial incrível no Frontend Fusion. A colaboração é a essência do avanço tecnológico, 
+        e vocês capturaram isso de forma brilhante. Achei inspirador. Recomendo focar na escalabilidade do projeto para garantir que a estrutura possa crescer sem comprometer a qualidade.
+        </p>
+      </main>
+      <footer className="flex flex-row gap-2.5 mt-2.5">
+        <img className="w-12 h-auto rounded-xl" src={foto2} alt="" />
+        <span>
+          <h3 className="text-lg">Linus Torvalds</h3>
+          <p className='text-xs text-gray-100'>criador do linux</p>
+        </span>
+      </footer>
+    </div>
 
         </div>
         </section>
