@@ -7,7 +7,6 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-
 # Configurações de variaveis
 
 <p>Variaveis convertidas em pixels para o facil entendimento na utilizaçao delas no projeto.</p>
@@ -55,9 +54,17 @@ Currently, two official plugins are available:
   "mobile-extraHiper": "28px",</br>
   "mobile-mega": "38px",</br></br>
 
-
 - VARIAVEIS DE LARGURA:</br></br>
-  "mini": "388px",</br></br>
+  "mini": "216px",
+  "extraMini": "298px",
+  "small": "317.008px",
+  "extraSmall": "325.008px",
+  "medium": "388px",
+  "extraMedium": "396px",
+  "larger": "459.008px",
+  "extraLarger": "475.008px",
+  "hiper": "507.008px",
+  "mega": "513.008px",
 
 - VARIAVEIS DE LARGURA MAXIMA:</br></br>
   "medium": "826px",</br>
