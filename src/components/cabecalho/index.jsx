@@ -6,12 +6,13 @@ import lista from "../../public/lista.svg";
 import listaB from "../../public/lista-dark.svg";
 import clsx from "clsx";
 import { IoClose } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDarkMode } from "../../model/darkMode";
 import { getDarkMode } from "../../controller/getDarkMode";
 
 export const Header = () => {
   const [list, setList] = useState(false);
+
 
   const { darkMode, setDarkMode } = useDarkMode();
 
