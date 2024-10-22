@@ -7,17 +7,15 @@ import tailwindB from "../../public/tailwind-dark.svg";
 import jsB from "../../public/js-dark.svg";
 import viteB from "../../public/vite-dark.svg";
 
-import useFetchData from "../../controller/useFetchData";
-import { useDarkMode } from "../../model/darkMode";
+import { useMembers } from "../../hooks/useMembers";
 
 export const HeroSection = () => {
-  const { darkMode } = useDarkMode();
 
-  const { data } = useFetchData(
-    import.meta.env.VITE_API_URL_GET_DADOS_CADASTRO
-  );
+  const {data} = useMembers()
+  console.log(data)
 
   return (
+    
     <section
       className="w-full self-center gap-10  pb-16 px-1  flex items-center justify-between max-w-[1300px] flex-col-reverse
       lg:flex-row
@@ -63,63 +61,42 @@ export const HeroSection = () => {
           />
         </figure>
         <figure className="flex mt-6  items-center justify-center">
-          <img
+          {/* <img
             src={data?.people[4].githubImgUrl}
             alt={data?.people[4].name}
             title={data?.people[4].name}
             className=" w-24    rounded-2xl md:w-32 "
-          />
+          /> */}
         </figure>
       </div>
 
       <div className="flex flex-col justify-center md:gap-4">
-        <div className="flex flex-col justify-center items-center md:items-center">
-          {darkMode ? (
-            <>
-              <p className="font-inconsolata text-gray-0 font-medium text-xl md:text-sizeParagraph">
-                projeto
-              </p>
-              <h2 className="font-zen font-normal text-white text-[26px]  md:text-sizeTitle text-gray-0 ">
-                Frontend Fusion
-              </h2>
-              <p className="font-inconsolata text-gray-0 text-lg lg:text-sizeParagraph">
-                Codifique o seu futuro hoje!
-              </p>
-            </>
-          ) : (
-            <>
-              <p className="font-inconsolata text-purple-2 font-medium text-xl md:text-sizeParagraph">
-                projeto
-              </p>
-              <h2 className="font-zen font-normal text-white text-[26px]  md:text-sizeTitle text-purple-2 ">
-                Frontend Fusion
-              </h2>
-              <p className="font-inconsolata text-purple-2 text-lg lg:text-sizeParagraph">
-                Codifique o seu futuro hoje!
-              </p>
-            </>
-          )}
-        </div>
+      <div className="flex flex-col justify-center items-center md:items-center">
+  <p className="font-inconsolata font-medium text-xl md:text-sizeParagraph dark:text-gray-0 text-purple-2">
+    projeto
+  </p>
+  <h2 className="font-zen font-normal text-[26px] md:text-sizeTitle dark:text-gray-0 text-purple-2">
+    Frontend Fusion
+  </h2>
+  <p className="font-inconsolata text-lg lg:text-sizeParagraph dark:text-gray-0 text-purple-2">
+    Codifique o seu futuro hoje!
+  </p>
+</div>
 
-        {darkMode ? (
-          <>
-            <div className="flex mt-6 gap-8 items-center self-center ">
-              <img src={react} className="w-10 md:w-14" />
-              <img src={vite} className="w-10 md:w-14" />
-              <img src={js} className="w-10 md:w-14" />
-              <img src={tailwind} className="w-10 md:w-14" />
-            </div>
-          </>
-        ) : (
-          <>
+
             <figure className="flex mt-6 gap-8 items-center self-center ">
-              <img src={reactB} className="w-10 md:w-14" />
-              <img src={viteB} className="w-10 md:w-14" />
-              <img src={jsB} className="w-10 md:w-14" />
-              <img src={tailwindB} className="w-10 md:w-14" />
+         
+              <img src={reactB} className="w-10 md:w-14 flex dark:hidden" />
+              <img src={viteB} className="w-10 md:w-14 flex dark:hidden" />
+              <img src={jsB} className="w-10 md:w-14 flex dark:hidden" />
+              <img src={tailwindB} className="w-10 md:w-14 flex dark:hidden" />
+
+              <img src={react} className="w-10 md:w-14 hidden dark:flex" />
+              <img src={vite} className="w-10 md:w-14 hidden dark:flex" />
+              <img src={js} className="w-10 md:w-14 hidden dark:flex" />
+              <img src={tailwind} className="w-10 md:w-14 hidden dark:flex" />
             </figure>
-          </>
-        )}
+     
       </div>
     </section>
   );

@@ -13,9 +13,7 @@ import { getDarkMode } from "../../controller/getDarkMode";
 export const Header = () => {
   const [list, setList] = useState(false);
 
-
   const { darkMode, setDarkMode } = useDarkMode();
-
 
   getDarkMode();
 
@@ -26,8 +24,7 @@ export const Header = () => {
     root.classList.toggle("dark", isDark);
     setDarkMode(isDark);
     localStorage.setItem("theme", isDark ? "dark" : "light");
-  }
-
+  };
 
   const ListMenu = clsx(
     `font-inconsolata py-1 text-purple-1 dark:text-[#ffebeb] cursor-pointer hover:underline`
@@ -36,7 +33,6 @@ export const Header = () => {
   const openAndClose = () => {
     setList(!list);
   };
-
 
   return (
     <header
@@ -73,7 +69,7 @@ export const Header = () => {
           </li>
         </ul>
       ) : (
-        <ul className="flex gap-16 hidden md:flex">
+        <ul className=" gap-16 hidden md:flex">
           <li className={`${ListMenu}`}>
             <a href="#">Sobre</a>
           </li>
@@ -88,32 +84,43 @@ export const Header = () => {
           </li>
         </ul>
       )}
-      {list ?
+      {list ? (
         <>
-          {darkMode ?
-            <IoClose color="white" size={35} className="cursor-pointer absolute  right-8 md:hidden" onClick={openAndClose} />
-            :
-            <IoClose color="black" size={35} className="cursor-pointer absolute  right-8 md:hidden" onClick={openAndClose} />
-          }
+          {darkMode ? (
+            <IoClose
+              color="white"
+              size={35}
+              className="cursor-pointer absolute  right-8 md:hidden"
+              onClick={openAndClose}
+            />
+          ) : (
+            <IoClose
+              color="black"
+              size={35}
+              className="cursor-pointer absolute  right-8 md:hidden"
+              onClick={openAndClose}
+            />
+          )}
         </>
-        :
+      ) : (
         <>
-          {darkMode ? <img
-            src={lista}
-            onClick={openAndClose}
-            className="cursor-pointer absolute right-8 md:hidden"
-          />
-            :
+          {darkMode ? (
+            <img
+              src={lista}
+              onClick={openAndClose}
+              className="cursor-pointer absolute right-8 md:hidden"
+            />
+          ) : (
             <img
               src={listaB}
               onClick={openAndClose}
               className="cursor-pointer absolute right-8 md:hidden"
-            />}
+            />
+          )}
         </>
-      }
+      )}
 
-
-      {darkMode ?
+      {darkMode ? (
         <>
           <img
             src={sol}
@@ -122,7 +129,7 @@ export const Header = () => {
             onClick={toggleDarkMode}
           />
         </>
-        :
+      ) : (
         <>
           <img
             src={lua}
@@ -130,9 +137,10 @@ export const Header = () => {
             className="cursor-pointer right-24 absolute flex md:sticky "
             onClick={toggleDarkMode}
           />
-        </>}
+        </>
+      )}
 
-      {darkMode ?
+      {darkMode ? (
         <button
           className="bg-green-1 text-white-1 flex text-white p-4 w-36 items-center gap-2 justify-center rounded-lg font-inconsolata text-xl
         "
@@ -140,7 +148,7 @@ export const Header = () => {
           github
           <img src={github} width={30} />
         </button>
-        :
+      ) : (
         <button
           className="bg-green-1 dark:text-white-1 flex text-white p-4 w-36 items-center gap-2 justify-center rounded-lg font-inconsolata text-xl
         "
@@ -148,7 +156,7 @@ export const Header = () => {
           github
           <img src={github2} width={30} />
         </button>
-      }
+      )}
     </header>
   );
 };
