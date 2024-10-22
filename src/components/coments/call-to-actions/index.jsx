@@ -1,5 +1,5 @@
 export default function CallToActions() {
-  // footer
+
   return (
     <section className=" justify-center items-center bg-black-1 gap-12  py-8 px-24 h-mini max-w-extraMedium w-screen rounded-2xl mx-auto hidden lg:flex mt-20 mb-10">
       <p className="text-white-1 text-desktop-extraLarger text-left font-normal font-mulish">

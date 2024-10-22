@@ -23,3 +23,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Footer />
     </main>
 );
+
+
+

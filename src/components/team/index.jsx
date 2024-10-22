@@ -1,10 +1,8 @@
-import React from 'react'
 import useFetchData from '../../controller/useFetchData';
 import Loader from './loader';
 import TeamCard from './TeamCard';
 export const Team = () => {
-  const { data, error, loading } = useFetchData('https://sistema-cadastro-dados-portifolio-front-end-fusion.vercel.app/api/EagleCoders');
-
+    const { data, error, loading } = useFetchData(import.meta.env.VITE_API_URL_GET_DADOS_CADASTRO);
   if (loading) return <Loader />;
   if (error) return <p className="text-red-500">Tivemos um erro! Tente novamente mais tarde.</p>;
 
