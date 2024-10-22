@@ -45,6 +45,7 @@ export default {
         green: {
           1: "#16c586",
           2: "#0a4c65",
+          3: "#06B94E",
         },
 
       },
@@ -94,7 +95,7 @@ export default {
         sizeParagraph: ["24px"],
         sizeParagraphSm: ["18px"],
         sizeTitle: ["38px"],
-        sizeTitleSm: ["38px"],
+        sizeTitleSm: ["32px"],
 
         "desktop-mini": "0.75rem",
         "desktop-extraMini": "0.938rem",

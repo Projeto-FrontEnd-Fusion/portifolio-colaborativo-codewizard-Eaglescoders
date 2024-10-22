@@ -1,6 +1,5 @@
 import { SectionAbout } from "./section-about";
 
-
 import imgBag from "../../public/img-bag.png";
 import imgTarget from "../../public/img-target.png";
 import imgStar from "../../public/img-star.png";
@@ -31,13 +30,16 @@ export function AboutProject() {
     ],
   };
 
-
-    return(
-        <section className="min-h-screen min-w-screen flex flex-col text-center px-7 md:px-[106px] text-purple-1 dark:text-white-1 gap-11 font-mulish">
-            <header className="w-[81%] mx-auto flex flex-col gap-8 md:gap-20">
-                <h2 className="text-[28px] md:text-5xl md:leading-7 font-bold">{projectDetails.title}</h2>
-                <p className="text-sm md:text-[22px] md:px-5">{projectDetails.description}</p>
-            </header>
+  return (
+    <section className="min-h-screen min-w-screen flex flex-col text-center px-7 md:px-[90px] text-purple-1 dark:text-white-1 gap-11 font-mulish">
+      <div className="w-[81%] mx-auto flex flex-col gap-8 md:gap-20">
+        <h2 className="text-[28px] md:text-5xl md:leading-10 font-bold">
+          {projectDetails.title}
+        </h2>
+        <p className="text-sizeParagraphSm md:text-sizeParagraph md:px-5">
+          {projectDetails.description}
+        </p>
+      </div>
 
       <section className="flex flex-col gap-14">
         {projectDetails.sections.map((section, index) => (
