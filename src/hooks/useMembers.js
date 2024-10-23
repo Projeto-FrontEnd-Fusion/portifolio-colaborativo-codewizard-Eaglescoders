@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ServiceMembers } from "../service/service";
-import { useHttp } from "../service/useHTTP";
+import { ServiceMembers } from "../service/members/service";
+import { useHttp } from "../service/members/useHTTP";
 import { useCallback, useMemo } from "react";
 
 export const useMembers = () => {
