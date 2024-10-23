@@ -8,12 +8,10 @@ import jsB from "../../public/js-dark.svg";
 import viteB from "../../public/vite-dark.svg";
 
 import { useMembers } from "../../hooks/useMembers";
+import { useGetComments } from "../../hooks/useGetComments";
 
 export const HeroSection = () => {
-
   const {data} = useMembers()
-  console.log(data)
-
   return (
     
     <section

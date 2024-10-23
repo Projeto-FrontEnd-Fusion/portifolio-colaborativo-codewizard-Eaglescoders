@@ -3,13 +3,15 @@ import { ServiceMembers } from "../service/members/service";
 import { useHttp } from "../service/members/useHTTP";
 import { useCallback, useMemo } from "react";
 
+export const DEFAULT_CONFIG = {
+  staleTime: 5 * 60 * 1000,
+  cacheTime: 6 * 60 * 1000,
+  retry: 3,
+};
+
 export const useMembers = () => {
-  const MEMBERS_QUERY_KEY = "getMembers";
-  const DEFAULT_CONFIG = {
-    staleTime: 5 * 60 * 1000,
-    cacheTime: 6 * 60 * 1000,
-    retry: 3,
-  };
+  const MEMBERS_QUERY_KEY = ["members", "get"];
+
 
   const queryClient = useQueryClient();
   const api = useHttp();

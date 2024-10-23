@@ -1,21 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import CallToActions from "./call-to-actions";
 import Card from "./card";
 import Form from "./form";
-import axios from "axios";
+import { useGetComments } from "../../hooks/useGetComments";
 
 export default function Comments() {
-  const [allComments, setAllComments] = useState([]);
-  
-  useEffect(() => {
-    const getAllComments = async () => {
-      const response = await axios.post(import.meta.env.VITE_API_URL_GET);
-      const dataResponse = await response.data;
-      setAllComments(dataResponse);
-    };
-    getAllComments();
-  }, []);
-
+  const { data: allComments } = useGetComments();
   const [selectedButton01, setSelectedButton01] = useState(true);
   const [selectedButton02, setSelectedButton02] = useState(false);
   const scroll = useRef();
@@ -52,7 +42,7 @@ export default function Comments() {
               ref={scroll}
             >
               <div className="flex flex-col items-center gap-8 lg:flex-row lg:pb-16 lg:w-fit">
-                {allComments.map(
+                {allComments?.map(
                   ({ name, githubuser, avatar, comment }, index) => (
                     <Card
                       key={comment}
