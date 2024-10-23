@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import CallToActions from "./call-to-actions";
 import Card from "./card";
-import Form from "./form";
 import { useGetComments } from "../../hooks/useGetComments";
 
 export default function Comments() {
@@ -35,7 +34,6 @@ export default function Comments() {
             Comentários e <br className="lg:hidden" />
             Avaliações
           </h2>
-
           <div className="flex flex-col">
             <div
               className="max-w-extralarger mx-auto lg:overflow-hidden scroll-smooth extraLg:max-w-hiper"
@@ -55,7 +53,6 @@ export default function Comments() {
                 )}
               </div>
             </div>
-
             <div className="hidden gap-3.5 self-center lg:flex">
               <button
                 className={`h-4 w-4 rounded-full cursor-pointer ${
@@ -74,18 +71,7 @@ export default function Comments() {
             </div>
           </div>
         </section>
-
-        <section className="flex flex-col gap-8">
-          <h2 className="font-inconsolata dark:text-gray-0 text-purple-1 text-mobile-hiper text-center lg:text-desktop-ultra">
-            Deixe o seu <br className="lg:hidden" /> Comentário
-          </h2>
-
-          <hr className="hidden lg:block bg-gray-1  w-hiper m-auto h-0.5 mt-miniNegativo mb-6" />
-
-          <Form />
-        </section>
       </>
-
       <CallToActions />
     </div>
   );

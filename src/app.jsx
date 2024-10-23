@@ -6,6 +6,7 @@ import Comments from "./components/coments";
 import { Header } from "./components/cabecalho";
 import { Team } from "./components/team";
 import LingAndTech from "./components/ling-and-tech/LingAndTech";
+import { Form } from "./components/coments/form";
 export const App = () => {
 
 
@@ -20,6 +21,7 @@ export const App = () => {
       <Team />
       <AboutProject />
       <Comments />
+      <Form />
       <Footer />
     </main>
   );
