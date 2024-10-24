@@ -3,14 +3,12 @@ import { ServiceComments } from "../service/comments"
 import { useHTTPcomments } from "../service/comments/useHTTPComments"
 import { useForm } from "react-hook-form"
 import { validationComments } from "../model/schema/commentsSchema"
-import { useCallback, useMemo } from "react"
+import { useMemo } from "react"
 import { yupResolver } from "@hookform/resolvers/yup"
 
 export const usePostComment = () => {
 
-  const { handleSubmit, register, watch, formState: { errors }, reset } = useForm({
-    resolver: yupResolver(validationComments)
-  })
+ 
   const query = useQueryClient()
   const api = useHTTPcomments()
 
@@ -24,7 +22,9 @@ export const usePostComment = () => {
 
     },
   })
-
+ const { handleSubmit, register, watch, formState: { errors }, reset } = useForm({
+    resolver: yupResolver(validationComments)
+  })
 const onSubmit = (data) =>{
   commentsMutation.mutate(data)
 }
@@ -32,6 +32,7 @@ const onSubmit = (data) =>{
     handleSubmit: handleSubmit(onSubmit),
     isLoading: commentsMutation.isLoading,
     isError: commentsMutation.isError,
+    isSuccess : commentsMutation.isSuccess,
     register,
     watch,
     errors,

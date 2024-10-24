@@ -5,6 +5,8 @@ import { SubmitButtonConfirm } from "./submitbutton.jsx";
 import { ResetButton } from "./Resetbutton.jsx";
 import { AvatarGithub } from "../../../hooks/avatar.jsx";
 import { usePostComment } from "../../../hooks/usePostComment.js";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const staticData = {
   name: "Guido van Rossum",
@@ -16,7 +18,7 @@ const staticData = {
 };
 
 export const Form = () => {
-  const { handleSubmit, register, watch, errors, isLoading, reset } =
+  const { handleSubmit, register, watch, errors, isLoading, reset, isSuccess } =
     usePostComment();
 
   const name = watch("name");
@@ -24,6 +26,15 @@ export const Form = () => {
   const comment = watch("comment");
   const githubuser = watch("githubuser");
   const avatar = watch("avatar");
+  const [avatarGithub, setavatarGithub] = useState("");
+
+  const handleAvatar = async () => {
+    const { data } = await axios.get(
+      `https://api.github.com/users/${githubuser}`
+    );
+    const { avatar_url } = await data;
+    setavatarGithub(avatar_url);
+  };
 
   return (
     <>
@@ -33,7 +44,7 @@ export const Form = () => {
           success: { duration: 4000 },
         }}
       />
-      <form className="flex justify-center gap-8" onSubmit={() => handleSubmit}>
+      <form className="flex justify-center gap-8" onSubmit={handleSubmit}>
         <fieldset className="flex flex-col w-extraSmall mx-auto gap-3.5 lg:mx-0 lg:w-extraLarger">
           <div className="flex gap-4">
             <InputForm
@@ -48,8 +59,8 @@ export const Form = () => {
               placeholderContent="githubuser"
               inputValue={githubuser}
               register={register("githubuser", {
-                onBlur: (e) => {
-                  console.log(e);
+                onBlur: () => {
+                  handleAvatar();
                 },
               })}
             />
@@ -83,16 +94,6 @@ export const Form = () => {
             onBlur={() => verifyText(comment)}
           ></textarea>
 
-          {/* <span
-            className={clsx(
-              comment >= 230
-                ? "text-red-400"
-                : "text-white-1",
-              "font-thin"
-            )}
-          >
-            {comment}/264
-          </span> */}
 
           {errors.comment && (
             <span className="text-red-600 px-4 bg-red-300 py-2 font-bold">
@@ -102,7 +103,7 @@ export const Form = () => {
 
           <fieldset className="flex gap-4 h-9 font-inter w-52 self-end">
             <SubmitButtonConfirm isLoading={isLoading} />
-            <ResetButton cleanData={reset()} />
+            <ResetButton cleanData={reset} />
           </fieldset>
         </fieldset>
 
@@ -125,7 +126,7 @@ export const Form = () => {
 
           <div className="flex items-center gap-2.5">
             <figure className="h-14 w-14 rounded-full bg-black-1 grid place-content-center overflow-hidden">
-              <AvatarGithub avatarUrl={avatar} />
+              <AvatarGithub avatarUrl={avatarGithub} />
             </figure>
             <div className="flex flex-col text-purple-1 dark:text-white-1">
               <h3 className="text-desktop-extraSmall font-bold">
@@ -139,10 +140,10 @@ export const Form = () => {
 
           <fieldset className="flex gap-4 h-9 font-inter w-52 self-end md:hidden">
             <SubmitButtonConfirm isLoading={isLoading} />
-            <ResetButton cleanData={() => reset} />
+            <ResetButton cleanData={reset} />
           </fieldset>
         </section>
       </form>
     </>
   );
-}
+};
