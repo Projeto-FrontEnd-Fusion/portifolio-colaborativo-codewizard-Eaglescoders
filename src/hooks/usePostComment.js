@@ -21,7 +21,7 @@ export const usePostComment = () => {
 
     },
   })
- const { handleSubmit, register, watch, formState: { errors }, reset } = useForm({
+ const { handleSubmit, register, watch, formState: { errors }, reset , setValue, setError} = useForm({
     resolver: yupResolver(validationComments)
   })
 const onSubmit = (data) =>{
@@ -35,7 +35,9 @@ const onSubmit = (data) =>{
     register,
     watch,
     errors,
-    reset
+    reset,
+    setValue,
+    setError
   }
 
 

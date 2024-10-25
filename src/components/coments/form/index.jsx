@@ -8,6 +8,7 @@ import { usePostComment } from "../../../hooks/usePostComment.js";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
 const staticData = {
   name: "Guido van Rossum",
   githubuser: "guidovanrossum",
@@ -18,22 +19,43 @@ const staticData = {
 };
 
 export const Form = () => {
-  const { handleSubmit, register, watch, errors, isLoading, reset, isSuccess } =
-    usePostComment();
+  const {
+    handleSubmit,
+    register,
+    watch,
+    errors,
+    isLoading,
+    reset,
+    isSuccess,
+    setValue,
+    setError,
+  } = usePostComment();
+
+  useEffect(() =>{
+    console.log("deu certo porra")
+  },[isSuccess])
 
   const name = watch("name");
   const email = watch("email");
   const comment = watch("comment");
   const githubuser = watch("githubuser");
-  const avatar = watch("avatar");
   const [avatarGithub, setavatarGithub] = useState("");
 
   const handleAvatar = async () => {
-    const { data } = await axios.get(
-      `https://api.github.com/users/${githubuser}`
-    );
-    const { avatar_url } = await data;
-    setavatarGithub(avatar_url);
+    try {
+      const { data } = await axios.get(
+        `https://api.github.com/users/${githubuser}`
+      );
+      const { avatar_url } = await data;
+
+      setavatarGithub(avatar_url);
+    } catch (error) {
+      if (error.response.data.status) setavatarGithub("not-found");
+      setError("githubuser", {
+        type: "manual",
+        message: ` Não encontrado`,
+      });
+    }
   };
 
   return (
@@ -44,21 +66,27 @@ export const Form = () => {
           success: { duration: 4000 },
         }}
       />
-      <form className="flex justify-center gap-8" onSubmit={handleSubmit}>
+      <form className="flex justify-center gap-8 my-20" onSubmit={handleSubmit}>
         <fieldset className="flex flex-col w-extraSmall mx-auto gap-3.5 lg:mx-0 lg:w-extraLarger">
           <div className="flex gap-4">
             <InputForm
+              isError={errors.name ? true : false}
               inputType="text"
-              placeholderContent="Digite o seu nome"
+              placeholderContent={!errors.name ? "Nome" : errors.name.message}
               inputValue={name}
               register={register("name")}
             />
 
             <InputForm
               inputType="text"
-              placeholderContent="githubuser"
+              isError={errors.githubuser ? true : false}
+              placeholderContent={
+                !errors.githubuser ? "Github name" : errors.githubuser.message
+              }
               inputValue={githubuser}
               register={register("githubuser", {
+                onChange: (e) =>
+                  setValue("githubuser", e.target.value.replace(/\s+/g, "")),
                 onBlur: () => {
                   handleAvatar();
                 },
@@ -66,40 +94,35 @@ export const Form = () => {
             />
           </div>
 
-          {errors.name && (
-            <span className="text-red-600 px-4 bg-red-300 py-2 font-bold flex-1">
-              {errors.name.message}
-            </span>
-          )}
-
           <InputForm
             inputType="email"
-            placeholderContent="email@exemplo.com"
+            isError={errors.email ? true : false}
+            placeholderContent={!errors.email ? "Email" : errors.email.message}
             inputValue={email || ""}
             register={register("email")}
           />
-          {errors.email && (
-            <span className="text-red-600 px-4 bg-red-300 py-2 font-bold">
-              {errors.email.message}
-            </span>
-          )}
 
           <textarea
             name=""
             id=""
             placeholder="Digite o seu comentário"
-            className="w-full bg-inherit h-mini rounded-lg border border-blue-1 p-2.5 outline-none text-purple-1 dark:text-white-1 font-inter resize-none lg:h-small lg:px-8 lg:pt-4"
+            className={`w-full bg-inherit h-mini rounded-lg ${
+              errors.comment
+                ? "border border-red-600 placeholder:text-red-600 text-red-600"
+                : "border border-blue-1 "
+            } p-2.5 outline-none text-purple-1 dark:text-white-1 font-inter resize-none lg:h-small lg:px-8 lg:pt-4`}
             value={comment}
             {...register("comment")}
             onBlur={() => verifyText(comment)}
           ></textarea>
 
-
-          {errors.comment && (
-            <span className="text-red-600 px-4 bg-red-300 py-2 font-bold">
-              {errors.comment.message}
-            </span>
-          )}
+          <span
+            className={`${
+             comment && comment?.length > 264 ? "text-red-500" : "text-white-1"
+            }`}
+          >
+            {comment ? comment.length : "0" }/264
+          </span>
 
           <fieldset className="flex gap-4 h-9 font-inter w-52 self-end">
             <SubmitButtonConfirm isLoading={isLoading} />
@@ -109,7 +132,7 @@ export const Form = () => {
 
         <section className="hidden lg:flex flex-col w-hiper h-auto bg-purple-3 dark:bg-purple-2 rounded-2xl p-9 gap-4">
           <h2 className="flex w-[100%] justify-between px-2 text-white-2 text-[12px] font-bold">
-            {!name ? (
+            { comment && !comment.length > 0 ? (
               <span>Todos os Comentários são Publicos</span>
             ) : (
               <h2 className="flex items-center gap-2  bg-green-600 px-2 py-1 rounded-md text-white">
@@ -144,6 +167,7 @@ export const Form = () => {
           </fieldset>
         </section>
       </form>
+
     </>
   );
 };

@@ -6,7 +6,7 @@ export const AvatarGithub = ({ avatarUrl }) => {
     return <FaUser className="text-zinc-200" size={32} />;
   } else if (avatarUrl === "loading") {
     return <FaSpinner className="text-green-200 animate animate-spin" size={32} />;
-  }else if(avatarUrl === "notfound"){
+  }else if(avatarUrl === "not-found"){
     return <MdDoNotDisturbAlt className="text-zinc-200" size={32} />;
   }else {
     return <img src={avatarUrl} alt="Avatar" />;
