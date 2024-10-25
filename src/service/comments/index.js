@@ -8,7 +8,6 @@ export class ServiceComments {
       const comments = await getAllComments(api)
       return comments
     } catch (error) {
-      console.error("Falha ao Buscar Comentarios", error)
       throw error
     }
   }
@@ -18,7 +17,6 @@ export class ServiceComments {
       const comments = await postOneComment(api, data)
       return comments
     }catch(error){
-      console.error("Falha ao Postar Coemntário", error)
       throw error
     }
   }

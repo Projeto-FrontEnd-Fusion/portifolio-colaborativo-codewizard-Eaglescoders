@@ -7,7 +7,6 @@ export class ServiceMembers {
       const members = await getAllMembers(api)
       return members
     } catch (error) {
-      console.error("Falha ao Obter Membros", error)
       throw error
     }
   }

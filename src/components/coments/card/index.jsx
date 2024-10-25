@@ -9,7 +9,6 @@ export default function Card({ name, githubuser, avatar, comment }) {
 
   const text = comment.length > maxLength && !isExpanded ? `${comment.substring(0, maxLength)}...` : comment;
 
-  // console.log(avatar);
 
   return (
     <div className="dark:bg-purple-2 bg-white-1 flex flex-col gap-8 p-9 rounded-2xl w-small lg:w-extraMedium shadow-cardShadow">

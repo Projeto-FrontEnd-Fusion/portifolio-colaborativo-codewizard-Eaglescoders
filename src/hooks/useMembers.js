@@ -28,7 +28,7 @@ export const useMembers = () => {
     cacheTime: DEFAULT_CONFIG.cacheTime,
     retry: DEFAULT_CONFIG.retry,
     refetchOnWindowFocus: false,
-    onError: (error) => console.error("Falha ao Obter Membros", error),
+    onError: (error) => { throw error },
   });
 
   return {

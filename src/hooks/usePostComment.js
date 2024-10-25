@@ -17,7 +17,6 @@ export const usePostComment = () => {
   const commentsMutation = useMutation({
     mutationFn: (data) => service.postComments(api, data),
     onSuccess: (data) => {
-      console.log("comentarios aqui", data)
       query.invalidateQueries({ queryKey: ['comments'] })
 
     },
