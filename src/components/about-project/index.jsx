@@ -1,8 +1,8 @@
 import { SectionAbout } from "./section-about";
+import imgBag from "../../assets/img-bag.png";
+import imgTarget from "../../assets/img-target.png";
+import imgStar from "../../assets/img-star.png";
 
-import imgBag from "../../public/img-bag.png";
-import imgTarget from "../../public/img-target.png";
-import imgStar from "../../public/img-star.png";
 
 export function AboutProject() {
   const projectDetails = {
