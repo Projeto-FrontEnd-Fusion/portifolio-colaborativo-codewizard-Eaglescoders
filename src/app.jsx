@@ -8,12 +8,9 @@ import { Team } from "./components/team";
 import LingAndTech from "./components/ling-and-tech/LingAndTech";
 import { Form } from "./components/coments/form";
 export const App = () => {
-
-
   return (
     <main className="flex flex-col bg-white-2 dark:bg-purple-1">
-      <span>
-      </span>
+      <span></span>
       <Header />
       <HeroSection />
       <Benefits />
@@ -22,7 +19,12 @@ export const App = () => {
       <AboutProject />
       <Comments />
       <Form />
-      <Footer />
+      {/* 
+      
+    
+      
+    
+      <Footer /> */}
     </main>
   );
 };

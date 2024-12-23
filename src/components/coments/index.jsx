@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
 import CallToActions from "./call-to-actions";
 import Card from "./card";
-import { useGetComments } from "../../hooks/useGetComments";
+import { useGetAllComments } from "../../hooks/useGetComments";
+import { FaSpinner } from "react-icons/fa";
 
 export default function Comments() {
-  const { data: allComments } = useGetComments();
+  const { data: allComments, isLoading } = useGetAllComments();
+
   const [selectedButton01, setSelectedButton01] = useState(true);
   const [selectedButton02, setSelectedButton02] = useState(false);
   const scroll = useRef();
@@ -39,11 +41,17 @@ export default function Comments() {
               className="max-w-extralarger mx-auto lg:overflow-hidden scroll-smooth extraLg:max-w-hiper"
               ref={scroll}
             >
+              {isLoading && (
+                <span className=" items-center flex gap-1">
+                  <FaSpinner className="animate-spin" /> Carregando comentários,
+                  Porfavor aguarde ...
+                </span>
+              )}
               <div className="flex flex-col items-center gap-8 lg:flex-row lg:pb-16 lg:w-fit">
                 {allComments?.map(
                   ({ name, githubuser, avatar, comment }, index) => (
                     <Card
-                      key={comment}
+                      key={index}
                       name={name}
                       githubuser={githubuser}
                       avatar={avatar}
