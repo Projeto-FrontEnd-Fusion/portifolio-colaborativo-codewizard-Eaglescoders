@@ -1,6 +1,7 @@
-import { apiSetup } from "../apisetup"
+import { setup } from "./setupMembers"
 
-export const useHttp = () => {
-  const api = apiSetup('https://sistema-cadastro-dados-portifolio-front-end-fusion.vercel.app/')
+const URL = import.meta.env.VITE_API_MEMBERS
+export const useHTTPmembers = () =>{
+  const api = setup(URL)
   return api
 }
