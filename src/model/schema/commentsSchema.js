@@ -10,7 +10,7 @@ export const validationComments = Yup.object().shape({
     .required("Não Pode está Vazio")
     .min(100, "O comentário deve ter no mínimo 100 caracteres")
     .max(264, "O comentário deve ter no máximo 264 caracteres"),
-    githubuser: Yup.string().max(
+  githubuser: Yup.string().max(
     25,
     "O usuário do GitHub deve ter no máximo 25 caracteres"
   ),

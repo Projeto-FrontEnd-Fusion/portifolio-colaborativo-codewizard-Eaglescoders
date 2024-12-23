@@ -1,23 +1,19 @@
-import {  useQuery } from "@tanstack/react-query"
-import { ServiceComments } from "../service/comments"
-import { useHTTPcomments } from "../service/comments/useHTTPComments"
-import { DEFAULT_CONFIG } from "./useMembers"
-import { useMemo } from "react"
+import { useQuery } from "@tanstack/react-query"
+import { useHTTPcomments } from "../service/comments/useHTTPcomments"
+import { getAllComments } from "../service/comments/getallComments"
+export const useGetAllComments = () => {
 
-export const useGetComments = () => {
+  // Pegar comentários
 
   const api = useHTTPcomments()
-  const service = useMemo(() => new ServiceComments(), [api]);
-  // Pegar comentários
-  const { data } = useQuery({
-    queryKey: ["get-comments", api],
-    queryFn: () => service.getComments(api),
-    staleTime: DEFAULT_CONFIG.staleTime,
-    cacheTime: DEFAULT_CONFIG.cacheTime,
-    retry: DEFAULT_CONFIG.retry
+
+  const { data, isError, isLoading, isPending, refetch } = useQuery({
+    queryKey: ["get-comments"],
+    queryFn: () => getAllComments(api),
+    retry: 3
   })
 
   return {
-    data
+    data, isError, isLoading, isPending
   }
 }  
