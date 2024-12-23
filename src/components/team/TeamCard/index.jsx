@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import githubIcon from '../../../public/assets/team_icons/github.png';
 import linkedinIcon from '../../../public/assets/team_icons/linkedin.png';
 import instagramIcon from '../../../public/assets/team_icons/instagram.png';
 import facebookIcon from '../../../public/assets/team_icons/facebook.png';
 import { TeamButton } from '../TeamButton';
 
+// TODO: Fazer a tipagem da entity member
 const TeamCard = ({ member }) => {
   const [showProjects, setShowProjects] = useState(false);
 

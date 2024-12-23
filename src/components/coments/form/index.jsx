@@ -1,11 +1,13 @@
-import { useRef, useState } from "react";
-import * as Yup from "yup";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { BsEye } from "react-icons/bs";
 import clsx from "clsx";
+
+
+import { BsEye } from "react-icons/bs";
 import { InputForm } from "./input.jsx";
 import { SubmitButtonConfirm } from "./submitbutton.jsx";
 import { ResetButton } from "./Resetbutton.jsx";
@@ -46,8 +48,6 @@ export default function Form() {
   } = useForm({
     resolver: yupResolver(validationComments),
   });
-
-  const file = useRef();
 
   const staticData = {
     name: "Guido van Rossum",
@@ -98,7 +98,7 @@ export default function Form() {
     }));
   };
 
-  const githubavatar = async (e) => {
+  const githubavatar = async () => {
     setformValues((prevState) => ({
       ...prevState,
       avatar: "loading",

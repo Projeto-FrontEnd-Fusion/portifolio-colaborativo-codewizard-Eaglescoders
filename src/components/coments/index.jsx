@@ -1,23 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import CallToActions from "./call-to-actions";
+import axios from "axios";
+
 import Card from "./card";
 import Form from "./form";
-import axios from "axios";
+import CallToActions from "./call-to-actions";
 
 export default function Comments() {
   const [allComments, setAllComments] = useState([]);
-  
-  useEffect(() => {
-    const getAllComments = async () => {
-      const response = await axios.post(import.meta.env.VITE_API_URL_GET);
-      const dataResponse = await response.data;
-      setAllComments(dataResponse);
-    };
-    getAllComments();
-  }, []);
-
   const [selectedButton01, setSelectedButton01] = useState(true);
   const [selectedButton02, setSelectedButton02] = useState(false);
+  
   const scroll = useRef();
 
   const carousel = (e) => {
@@ -37,6 +29,15 @@ export default function Comments() {
     }
   };
 
+  useEffect(() => {
+    const getAllComments = async () => {
+      const response = await axios.post(import.meta.env.VITE_API_URL_GET);
+      const dataResponse = await response.data;
+      setAllComments(dataResponse);
+    };
+    getAllComments();
+  }, []);
+
   return (
     <div className="py-28 gap-16 flex flex-col">
       <>
@@ -55,7 +56,7 @@ export default function Comments() {
                 {allComments.map(
                   ({ name, githubuser, avatar, comment }, index) => (
                     <Card
-                      key={comment}
+                      key={index}
                       name={name}
                       githubuser={githubuser}
                       avatar={avatar}

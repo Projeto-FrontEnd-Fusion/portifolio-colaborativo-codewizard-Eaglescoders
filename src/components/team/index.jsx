@@ -1,6 +1,7 @@
 import useFetchData from '../../controller/useFetchData';
 import Loader from './loader';
 import TeamCard from './TeamCard';
+
 export const Team = () => {
     const { data, error, loading } = useFetchData(import.meta.env.VITE_API_URL_GET_DADOS_CADASTRO);
   if (loading) return <Loader />;

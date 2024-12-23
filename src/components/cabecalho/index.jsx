@@ -1,12 +1,13 @@
+import { useState } from "react";
+import clsx from "clsx";
+
 import github from "../../public/github-icon.svg";
 import github2 from "../../public/github-icon-black.svg";
 import sol from "../../public/sol.svg";
 import lua from "../../public/sol-black.svg";
 import lista from "../../public/lista.svg";
 import listaB from "../../public/lista-dark.svg";
-import clsx from "clsx";
 import { IoClose } from "react-icons/io5";
-import { useEffect, useState } from "react";
 import { useDarkMode } from "../../model/darkMode";
 import { getDarkMode } from "../../controller/getDarkMode";
 
@@ -14,7 +15,6 @@ export const Header = () => {
   const [list, setList] = useState(false);
 
   const { darkMode, setDarkMode } = useDarkMode();
-
 
   getDarkMode();
 
@@ -27,7 +27,6 @@ export const Header = () => {
     localStorage.setItem("theme", isDark ? "dark" : "light");
   }
 
-
   const ListMenu = clsx(
     `font-inconsolata py-1 text-purple-1 dark:text-[#ffebeb] cursor-pointer hover:underline`
   );
@@ -35,7 +34,6 @@ export const Header = () => {
   const openAndClose = () => {
     setList(!list);
   };
-
 
   return (
     <header
@@ -72,7 +70,7 @@ export const Header = () => {
           </li>
         </ul>
       ) : (
-        <ul className="flex gap-16 hidden md:flex">
+        <ul className="hidden md:flex md:gap-16">
           <li className={`${ListMenu}`}>
             <a href="#">Sobre</a>
           </li>

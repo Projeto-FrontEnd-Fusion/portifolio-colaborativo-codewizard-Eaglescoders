@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 export default function Card({ name, githubuser, avatar, comment }) {
 
@@ -13,7 +14,7 @@ export default function Card({ name, githubuser, avatar, comment }) {
 
   return (
     <div className="dark:bg-purple-2 bg-white-1 flex flex-col gap-8 p-9 rounded-2xl w-small lg:w-extraMedium shadow-cardShadow">
-      <p className="text-mobile-extraMini font-bold leading-4 h-full lg:min-h-28 lg:max-h-32 relative text-purple-1 dark:text-gray-1 lg:leading-desktop-larger lg:text-desktop-extraMini">
+      <p className="text-mobile-extraMini font-bold leading-4 h-full lg:min-h-28 lg:max-h-32 relative text-purple-1 dark:text-gray-1 lg:leading-desktop-larger lg:text-desktop-extraMini overflow-hidden">
 
         &#34;{text}&#34;
 
@@ -44,4 +45,10 @@ export default function Card({ name, githubuser, avatar, comment }) {
       </div>
     </div>
   );
+}
+Card.propTypes = {
+  name: PropTypes.string,
+  githubuser: PropTypes.string,
+  avatar: PropTypes.string,
+  comment: PropTypes.string
 }
