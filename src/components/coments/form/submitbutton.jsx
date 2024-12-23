@@ -1,4 +1,5 @@
 import { FaSpinner } from "react-icons/fa";
+
 export const SubmitButtonConfirm = ({ isLoading }) => {
   return (
     <>
@@ -9,7 +10,7 @@ export const SubmitButtonConfirm = ({ isLoading }) => {
         {isLoading ? (
           <span className="flex items-center gap-1">
             <FaSpinner className="animation animate-spin" /> Enviando...
-            </span>
+          </span>
         ) : (
           <span>Enviar</span>
         )}

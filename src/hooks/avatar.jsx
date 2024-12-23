@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { FaSpinner, FaUser } from "react-icons/fa";
 import { MdDoNotDisturbAlt } from "react-icons/md";
 
@@ -11,5 +12,7 @@ export const AvatarGithub = ({ avatarUrl }) => {
   }else {
     return <img src={avatarUrl} alt="Avatar" />;
   }
-  
+};
+AvatarGithub.propTypes = {
+  avatarUrl: PropTypes.string,
 };

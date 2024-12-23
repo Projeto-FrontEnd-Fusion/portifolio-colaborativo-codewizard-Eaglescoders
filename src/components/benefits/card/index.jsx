@@ -1,9 +1,6 @@
 import PropTypes from "prop-types";
-import { useDarkMode } from "../../../model/darkMode";
 
 const Card = ({ title, text, src, alt }) => {
-  const { darkMode } = useDarkMode();
-
   return (
     <div className="dark:bg-purple-2 shadow-cardShadow drop-shadow-none rounded-lg flex flex-col gap-2 p-8   w-medium h-extraSmall lg:gap-4 lg:h-larger">
       <h2 className="text-base font-bold flex gap-2.5 font-mulish dark:text-gray-2 lg:text-lg lg:gap-1.5">

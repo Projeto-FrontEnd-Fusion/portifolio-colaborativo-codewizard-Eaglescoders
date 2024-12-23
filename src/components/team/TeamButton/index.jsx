@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from "prop-types"
 
 export const TeamButton = ({text, onClick}) => {
   return (
@@ -9,4 +9,7 @@ export const TeamButton = ({text, onClick}) => {
     </span>
   )
 }
-
+TeamButton.propTypes = {
+  text: PropTypes.string,
+  onClick: PropTypes.func,
+};

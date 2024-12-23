@@ -1,13 +1,14 @@
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { BsEye } from "react-icons/bs";
 import { InputForm } from "./input.jsx";
 import { SubmitButtonConfirm } from "./submitbutton.jsx";
 import { ResetButton } from "./Resetbutton.jsx";
 import { AvatarGithub } from "../../../hooks/avatar.jsx";
-import { usePostComment } from "../../../hooks/usePostComment.js";
-import { useEffect, useState } from "react";
-import axios from "axios";
-
+import { useHandlerForms } from "../../../hooks/useHandleForm.js";
+import { validationComments } from "../../../model/schema/commentsSchema.js";
+import { useFormComments } from "../../../hooks/useForm.js";
+import { useHandleAvatar } from "../../../utils/handleAvatar.js";
+import { useEffect } from "react";
 
 const staticData = {
   name: "Guido van Rossum",
@@ -19,44 +20,25 @@ const staticData = {
 };
 
 export const Form = () => {
-  const {
-    handleSubmit,
-    register,
-    watch,
-    errors,
-    isLoading,
-    reset,
-    isSuccess,
-    setValue,
-    setError,
-  } = usePostComment();
-
-  useEffect(() =>{
-    console.log("deu certo porra")
-  },[isSuccess])
+  const { register, handleSubmit, watch, errors, setValue, reset } =
+    useHandlerForms();
 
   const name = watch("name");
   const email = watch("email");
   const comment = watch("comment");
   const githubuser = watch("githubuser");
-  const [avatarGithub, setavatarGithub] = useState("");
+  const { comments } = useFormComments();
+  const { fetchAvatar, avatarUrl } = useHandleAvatar();
 
-  const handleAvatar = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://api.github.com/users/${githubuser}`
-      );
-      const { avatar_url } = await data;
-
-      setavatarGithub(avatar_url);
-    } catch (error) {
-      if (error.response.data.status) setavatarGithub("not-found");
-      setError("githubuser", {
-        type: "manual",
-        message: ` Não encontrado`,
-      });
-    }
+  const onSubmit = (data) => {
+    console.log(data);
+    comments.mutate(data);
   };
+
+  useEffect(() => {
+    if (comments.isSuccess) reset();
+    return;
+  }, [comments.isSuccess, reset]);
 
   return (
     <>
@@ -66,7 +48,10 @@ export const Form = () => {
           success: { duration: 4000 },
         }}
       />
-      <form className="flex justify-center gap-8 my-20" onSubmit={handleSubmit}>
+      <form
+        className="flex justify-center gap-8 my-20"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <fieldset className="flex flex-col w-extraSmall mx-auto gap-3.5 lg:mx-0 lg:w-extraLarger">
           <div className="flex gap-4">
             <InputForm
@@ -87,8 +72,8 @@ export const Form = () => {
               register={register("githubuser", {
                 onChange: (e) =>
                   setValue("githubuser", e.target.value.replace(/\s+/g, "")),
-                onBlur: () => {
-                  handleAvatar();
+                onBlur: (e) => {
+                  fetchAvatar(e.target.value);
                 },
               })}
             />
@@ -113,26 +98,25 @@ export const Form = () => {
             } p-2.5 outline-none text-purple-1 dark:text-white-1 font-inter resize-none lg:h-small lg:px-8 lg:pt-4`}
             value={comment}
             {...register("comment")}
-            onBlur={() => verifyText(comment)}
           ></textarea>
-
+          <span>{errors.comment && errors.comment.message}</span>
           <span
             className={`${
-             comment && comment?.length > 264 ? "text-red-500" : "text-white-1"
+              comment && comment?.length > 264 ? "text-red-500" : "text-white-1"
             }`}
           >
-            {comment ? comment.length : "0" }/264
+            {comment ? comment.length : "0"}/264
           </span>
 
           <fieldset className="flex gap-4 h-9 font-inter w-52 self-end">
-            <SubmitButtonConfirm isLoading={isLoading} />
+            <SubmitButtonConfirm isLoading={comments.isPending} />
             <ResetButton cleanData={reset} />
           </fieldset>
         </fieldset>
 
         <section className="hidden lg:flex flex-col w-hiper h-auto bg-purple-3 dark:bg-purple-2 rounded-2xl p-9 gap-4">
           <h2 className="flex w-[100%] justify-between px-2 text-white-2 text-[12px] font-bold">
-            { comment && !comment.length > 0 ? (
+            {comment && !comment.length > 0 ? (
               <span>Todos os Comentários são Publicos</span>
             ) : (
               <h2 className="flex items-center gap-2  bg-green-600 px-2 py-1 rounded-md text-white">
@@ -149,7 +133,7 @@ export const Form = () => {
 
           <div className="flex items-center gap-2.5">
             <figure className="h-14 w-14 rounded-full bg-black-1 grid place-content-center overflow-hidden">
-              <AvatarGithub avatarUrl={avatarGithub} />
+              <AvatarGithub avatarUrl={avatarUrl} />
             </figure>
             <div className="flex flex-col text-purple-1 dark:text-white-1">
               <h3 className="text-desktop-extraSmall font-bold">
@@ -162,12 +146,11 @@ export const Form = () => {
           </div>
 
           <fieldset className="flex gap-4 h-9 font-inter w-52 self-end md:hidden">
-            <SubmitButtonConfirm isLoading={isLoading} />
+            <SubmitButtonConfirm isLoading={comments.isPending} />
             <ResetButton cleanData={reset} />
           </fieldset>
         </section>
       </form>
-
     </>
   );
 };
