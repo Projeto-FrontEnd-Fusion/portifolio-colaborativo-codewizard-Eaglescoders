@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useHTTPcomments } from "../service/comments/useHTTPcomments";
 import { getAllComments } from "../service/comments/getallComments";
+import { useHTTPcomments } from "../service/comments/useHTTPC";
 
 export const useFormComments = () => {
   const api = useHTTPcomments();

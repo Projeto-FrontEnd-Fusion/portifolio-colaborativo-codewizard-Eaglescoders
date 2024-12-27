@@ -1,13 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import { useHTTPcomments } from "../service/comments/useHTTPcomments"
 import { getAllComments } from "../service/comments/getallComments"
+import { useHTTPcomments } from "../service/comments/useHTTPC"
 export const useGetAllComments = () => {
-
-  // Pegar comentários
-
   const api = useHTTPcomments()
 
-  const { data, isError, isLoading, isPending, refetch } = useQuery({
+  const { data, isError, isLoading, isPending } = useQuery({
     queryKey: ["get-comments"],
     queryFn: () => getAllComments(api),
     retry: 3
